@@ -1,8 +1,12 @@
 import java.util.HashMap;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class ATM
 {
 	private HashMap<Integer,Double> idMap;
+	NumberFormat n = new
+	DecimalFormat("0.00");
 	
 	public ATM()
 	{
@@ -40,14 +44,18 @@ public class ATM
 	{
 		if (idMap.containsKey(accNum))
 		{
+			double currentBalance = idMap.get(accNum);
+			double balance = Double.parseDouble(n.format(currentBalance));
+			idMap.replace(accNum, balance);
 			return (double)idMap.get(accNum);
+			
 		}
 		return 0.0;
 	}
 	
 	public boolean depositMoney(int accNum, double amount)
 	{
-		if (idMap.containsKey(accNum))
+		if (idMap.containsKey(accNum) && amount > 0)
 		{
 			idMap.replace(accNum,idMap.get(accNum) + amount);
 			return true;

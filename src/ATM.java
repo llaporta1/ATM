@@ -57,10 +57,13 @@ public class ATM
 	
 	public boolean withdrawMoney(int accNum, double amount)
 	{
-		if (idMap.containsKey(accNum))
+		if (idMap.containsKey(accNum) && amount > 0)
 		{
+			if(idMap.get(accNum)- amount >= 0.0)
+			{
 			idMap.replace(accNum,idMap.get(accNum) - amount);
 			return true;
+			}
 		}
 		return false;
 	}
